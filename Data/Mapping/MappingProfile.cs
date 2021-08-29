@@ -14,6 +14,7 @@ namespace Data.Mapping
             // Source -> Target
             CreateMap<Make, MakeResource>();
             CreateMap<Model, ModelResource>();
+            CreateMap<Feature, FeatureResource>();
         }
     }
 }
