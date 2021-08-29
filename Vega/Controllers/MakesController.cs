@@ -1,5 +1,7 @@
-﻿using Data.Context;
+﻿using AutoMapper;
+using Data.Context;
 using Data.Models;
+using Data.Resources;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,16 +17,20 @@ namespace Vega.Controllers
     public class MakesController : ControllerBase
     {
         private readonly VegaDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MakesController(VegaDbContext context)
+        public MakesController(VegaDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet("/api/makes")]
-        public async Task<IEnumerable<Make>> GetMakes()
+        public async Task<IEnumerable<MakeResource>> GetMakes()
         {
-            return await _context.Makes.Include(m => m.Models).ToListAsync();
+            var makes = await _context.Makes.Include(m => m.Models).ToListAsync();
+            IEnumerable<MakeResource> makeResources = _mapper.Map<List<Make>, List<MakeResource>>(makes);
+            return makeResources;
         }
     }
 }
