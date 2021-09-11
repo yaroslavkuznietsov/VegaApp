@@ -39,13 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Data">
-      <HintPath>..\Data\bin\Debug\netcoreapp3.1\Data.dll</HintPath>
-    </Reference>
+    <Folder Include="ClientApp\src\app\services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\services\" />
+    <Reference Include="Data">
+      <HintPath>..\Data\bin\Debug\netcoreapp3.1\Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
